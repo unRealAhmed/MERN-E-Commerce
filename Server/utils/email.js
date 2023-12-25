@@ -32,7 +32,7 @@ module.exports = class Email {
     Happy shopping!
     The E-Commerce Team 🌐`;
 
-    await this.send(subject, null, message);
+    await this.send(subject, message, null);
   }
 
   async sendPasswordResetEmail(html) {

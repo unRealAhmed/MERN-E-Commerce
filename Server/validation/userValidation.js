@@ -11,13 +11,13 @@ const userValidationSchema = Joi.object({
 
   phoneNumber: Joi.string(),
 
-  fullname: Joi.string().min(3).max(25).regex(/^[a-zA-Z]+$/).required()
+  fullname: Joi.string().min(3).max(25).trim().regex(/^[a-zA-Z\s]+$/).required()
     .messages({
       'string.base': 'Fullname must be a string',
       'string.empty': 'Fullname is required',
       'string.min': 'Fullname should have at least {#limit} characters',
       'string.max': 'Fullname should have at most {#limit} characters',
-      'string.pattern.base': 'Fullname must only contain alphabetic characters',
+      'string.pattern.base': 'Fullname must only contain alphabetic characters and spaces',
       'any.required': 'Fullname is required',
     }),
 
