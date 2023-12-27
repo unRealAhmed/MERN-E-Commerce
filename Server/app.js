@@ -8,6 +8,7 @@ const errorController = require('./controllers/errorController');
 const app = express()
 app.use(cookieParser(process.env.JWT_SECRET_KEY));
 app.use(express.json())
+app.use(express.static('uploads'))
 connectDatabase()
 
 // Routes
