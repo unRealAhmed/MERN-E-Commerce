@@ -4,11 +4,13 @@ const brandRouter = require('./api/brand');
 const categoryRouter = require('./api/category');
 const productRouter = require('./api/product');
 const userRoutes = require('./api/user')
+const reviewRoutes = require('./api/review');
 
 router.use('/api/v1/auth', authRoutes)
 router.use('/api/v1/users', userRoutes)
 router.use('/api/v1/products', productRouter)
-router.use('/api/v1/categories', categoryRouter) 
-router.use('/api/v1/brands', brandRouter) 
+router.use('/api/v1/categories', categoryRouter)
+router.use('/api/v1/brands', brandRouter)
+router.use('/api/v1/reviews', reviewRoutes)
 
 module.exports = router
