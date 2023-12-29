@@ -1,0 +1,109 @@
+.footer {
+  border-top: 1px solid #e4e6eb;
+  padding: 2rem 0;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+  padding: 0 1.5rem;
+}
+
+.footerContent h3 {
+  margin-bottom: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #262626;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+.footerContent ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footerContent ul li a {
+  color: #65676b;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.footerContent ul li a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footerContent p {
+  font-size: 14px;
+  color: #323232;
+  margin-bottom: 8px;
+}
+
+.footerContent form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footerContent form input {
+  height: 4.5rem;
+  flex-grow: 1;
+  padding: 8px 10px;
+  border: 1px solid #e4e6eb;
+  font-size: 14px;
+  color: #323232;
+  border-radius: 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+.footerContent form input:focus {
+  outline: none;
+  /* border: none; */
+}
+
+.footerContent form button {
+  height: 4.5rem;
+  padding: 8px 10px;
+  border: 1px solid #e4e6eb;
+  font-size: 14px;
+  color: #323232;
+  border-radius: 0 3px 3px 0px;
+  border: 1px solid #e4e6eb;
+  background-color: #fff;
+  transition: all 0.2s ease-in;
+}
+
+.footerContent form button:hover {
+  background-color: var(--blue);
+  color: #fff;
+}
+
+.footerCopyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerCopyright p {
+  font-size: 14px;
+  color: #323232;
+  margin-bottom: 1.6rem;
+}
+
+.footerNetwork {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footerNetwork img {
+  height: 40px;
+  width: 40px;
+}
