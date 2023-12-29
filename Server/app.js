@@ -5,7 +5,6 @@ const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-const connectDatabase = require('./utils/DB');
 const apiRoutes = require('./routes/apiRoutes');
 const errorController = require('./controllers/errorController');
 
@@ -24,7 +23,6 @@ app.use('/api', rateLimit({
   message: 'Too many requests from this IP, please try again in an hour!',
 }));
 app.use(express.static('uploads'));
-connectDatabase();
 
 // Routes
 app.use(apiRoutes);
