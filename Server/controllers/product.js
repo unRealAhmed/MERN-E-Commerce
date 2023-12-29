@@ -1,7 +1,9 @@
 const { default: slugify } = require("slugify");
-const productModel = require("../models/Product");
+const productModel = require("../models/product");
 const asyncHandler = require("../utils/asyncHandler");
 const AppError = require("../utils/appErrors");
+const APIFeatures = require("../utils/apiFeatures");
+
 
 const addProduct = asyncHandler(async (req, res, next) => {
     req.body.slug = slugify(req.body.name);
@@ -13,9 +15,18 @@ const addProduct = asyncHandler(async (req, res, next) => {
 });
 
 const getAllProducts = asyncHandler(async (req, res, next) => {
-    const products = await productModel.find({});
-    res.json({ message: "success", products });
+    const apiFeatures = new APIFeatures(productModel.find({}), req.query)
+        .filter()
+        .sort()
+        .paginate()
+        .search()
+        .selectFields();
+
+    const products = await apiFeatures.query;
+
+    res.json({ message: 'success', products });
 });
+
 
 const spacificProduct = asyncHandler(async (req, res, next) => {
     const { id } = req.params;

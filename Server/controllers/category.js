@@ -2,6 +2,7 @@ const { default: slugify } = require("slugify");
 const categoryModel = require("../models/Category");
 const AppError = require("../utils/appErrors");
 const asyncHandler = require("../utils/asyncHandler");
+const APIFeatures = require("../utils/apiFeatures");
 
 const addcategory = asyncHandler(async (req, res, next) => {
     req.body.slug = slugify(req.body.name);
@@ -13,8 +14,16 @@ const addcategory = asyncHandler(async (req, res, next) => {
 });
 
 const getAllcategorys = asyncHandler(async (req, res, next) => {
-    const categorys = await categoryModel.find({});
-    res.json({ message: "success", categorys });
+    const apiFeatures = new APIFeatures(categoryModel.find({}), req.query)
+        .filter()
+        .sort()
+        .paginate()
+        .search()
+        .selectFields();
+
+    const categories = await apiFeatures.query;
+
+    res.json({ message: 'success', categories });
 });
 
 const spacificcategory = asyncHandler(async (req, res, next) => {

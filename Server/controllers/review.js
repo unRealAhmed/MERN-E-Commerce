@@ -1,8 +1,8 @@
 const Review = require('../models/Review')
-const Product = require('../models/Product')
+const Product = require('../models/product')
 const asyncHandler = require('../utils/asyncHandler')
 const AppError = require('../utils/appErrors')
-
+const APIFeatures = require('../utils/apiFeatures')
 
 exports.createReview = asyncHandler(async (req, res, next) => {
   const productId = req.body.product;
@@ -39,18 +39,17 @@ exports.createReview = asyncHandler(async (req, res, next) => {
 });
 
 exports.getAllReviews = asyncHandler(async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const apiFeatures = new APIFeatures(Review.find(), req.query)
+    .paginate();
 
-  const skip = (page - 1) * limit;
-
-  const reviews = await Review.find().skip(skip).limit(limit);
+  const reviews = await apiFeatures.query;
 
   const count = await Review.countDocuments();
 
   res.status(200).json({
     reviews,
-    totalPages: Math.ceil(count / limit),
-    currentPage: Number(page),
+    totalPages: Math.ceil(count / apiFeatures.queryString.limit),
+    currentPage: Number(apiFeatures.queryString.page),
     count,
   });
 });

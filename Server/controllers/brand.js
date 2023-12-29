@@ -2,6 +2,7 @@ const { default: slugify } = require("slugify");
 const asyncHandler = require("../utils/asyncHandler");
 const AppError = require("../utils/appErrors");
 const brandModel = require("../models/Brand");
+const APIFeatures = require("../utils/apiFeatures");
 
 const addbrand = asyncHandler(async (req, res, next) => {
     req.body.slug = slugify(req.body.name);
@@ -13,8 +14,16 @@ const addbrand = asyncHandler(async (req, res, next) => {
 });
 
 const getAllbrands = asyncHandler(async (req, res, next) => {
-    const brands = await brandModel.find({});
-    res.json({ message: "success", brands });
+    const apiFeatures = new APIFeatures(brandModel.find({}), req.query)
+        .filter()
+        .sort()
+        .paginate()
+        .search()
+        .selectFields();
+
+    const brands = await apiFeatures.query;
+
+    res.json({ message: 'success', brands });
 });
 
 const spacificbrand = asyncHandler(async (req, res, next) => {

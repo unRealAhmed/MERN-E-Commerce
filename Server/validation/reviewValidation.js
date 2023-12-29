@@ -1,12 +1,6 @@
 const Joi = require('joi');
 
 const reviewSchema = Joi.object({
-  user: Joi.string().required().messages({
-    'any.required': 'User is required.',
-  }),
-  product: Joi.string().required().messages({
-    'any.required': 'Product is required.',
-  }),
   review: Joi.string().required().label('Review Message').messages({
     'any.required': 'Please add a message for your review.',
   }),

@@ -2,23 +2,28 @@ const User = require('../models/User')
 const asyncHandler = require("../utils/asyncHandler")
 const AppError = require("../utils/appErrors")
 const tokenGenerator = require('../utils/tokenGenerator')
+const APIFeatures = require('../utils/apiFeatures')
+
 
 exports.getAllUsers = asyncHandler(async (req, res, next) => {
-  const { page = 1, limit = 10 } = req.query;
+  const apiFeatures = new APIFeatures(User.find({}, { _id: 0 }), req.query)
+    .filter()
+    .sort()
+    .paginate()
+    .search()
+    .selectFields();
 
-  const users = await User.find({}, { password: 0, _id: 0 })
-    .limit(limit * 1)
-    .skip((page - 1) * limit)
+  const users = await apiFeatures.query;
 
   const count = await User.countDocuments();
 
   res.status(200).json({
     users,
-    totalPages: Math.ceil(count / limit),
-    currentPage: Number(page),
-    count
+    totalPages: Math.ceil(count / apiFeatures.queryString.limit),
+    currentPage: Number(apiFeatures.queryString.page),
+    count,
   });
-})
+});
 
 exports.getMe = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
