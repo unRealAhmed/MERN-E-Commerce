@@ -1,0 +1,23 @@
+.topHeader {
+  padding: 1rem 0;
+  background-color: #24292e;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.headerCol {
+  padding: 0 1.6rem;
+  color: var(--white);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

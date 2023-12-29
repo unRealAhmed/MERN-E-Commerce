@@ -1,0 +1,104 @@
+.BottomHeader {
+  padding: 1.6rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 1.5rem;
+  gap: 1.5rem;
+}
+
+.menu {
+  display: flex;
+  justify-self: start;
+  align-items: center;
+  gap: 1.5rem;
+  padding-right: 12rem;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+}
+
+.menuIcon {
+  font-size: 2.4rem;
+  color: #ccc;
+}
+
+.menuTitle {
+  font-size: 2rem;
+  color: #323232;
+}
+
+/* search  */
+
+.search {
+  flex-grow: 1;
+}
+
+.search input {
+  padding: 1rem 2rem;
+  width: 100%;
+  border: 1px solid #e4e6eb;
+  font-size: 14px;
+  color: #323232;
+  border-radius: 6px;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+/* Nav  */
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  padding-left: 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cartIcon {
+  background: none;
+  border: none;
+}
+
+.cartIcon svg {
+  cursor: pointer;
+  font-size: 2.2rem;
+  color: #000;
+  stroke: #000;
+  transition: color 0.3s;
+}
+
+.cartIcon svg:hover {
+  color: #666;
+  stroke: #666;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.navList button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+}
+
+.navList button span {
+  font-size: 1.4rem;
+  color: #323232;
+}
+
+.navList button svg {
+  font-size: 2.4rem;
+  color: #ccc;
+  stroke: #ccc;
+}
