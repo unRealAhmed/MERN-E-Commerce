@@ -1,18 +1,22 @@
 const router = require('express').Router();
-const authRoutes = require('./api/auth');
-const brandRouter = require('./api/brand');
-const categoryRouter = require('./api/category');
-const productRouter = require('./api/product');
-const userRoutes = require('./api/user')
-const reviewRoutes = require('./api/review');
-const addressRoutes = require('./api/address');
+const baseURL = '/api/v1';
 
-router.use('/api/v1/auth', authRoutes)
-router.use('/api/v1/users', userRoutes)
-router.use('/api/v1/products', productRouter)
-router.use('/api/v1/categories', categoryRouter)
-router.use('/api/v1/brands', brandRouter)
-router.use('/api/v1/reviews', reviewRoutes)
-router.use('/api/v1/address', addressRoutes)
+const authRoutes = require(`./api/auth`);
+const brandRouter = require(`./api/brand`);
+const categoryRouter = require(`./api/category`);
+const productRouter = require(`./api/product`);
+const userRoutes = require(`./api/user`);
+const reviewRoutes = require(`./api/review`);
+const addressRoutes = require(`./api/address`);
+const merchantRoutes = require(`./api/merchant`);
 
-module.exports = router
+router.use(`${baseURL}/auth`, authRoutes);
+router.use(`${baseURL}/users`, userRoutes);
+router.use(`${baseURL}/products`, productRouter);
+router.use(`${baseURL}/categories`, categoryRouter);
+router.use(`${baseURL}/brands`, brandRouter);
+router.use(`${baseURL}/reviews`, reviewRoutes);
+router.use(`${baseURL}/address`, addressRoutes);
+router.use(`${baseURL}/merchant`, merchantRoutes);
+
+module.exports = router;
