@@ -15,7 +15,7 @@ const BottomHeader = () => {
             <FaBars className={styles.menuIcon} />
           </button>
           <p className={styles.menuTitle}>
-            <Link>MERN Store</Link>
+            <Link to="/">MERN Store</Link>
           </p>
         </div>
 
@@ -35,10 +35,9 @@ const BottomHeader = () => {
               </button>
             </li>
             <li>
-              <button>
+              <Link to="shop">
                 <span>Shop</span>
-                <RxCaretDown />
-              </button>
+              </Link>
             </li>
             <li>
               <button>

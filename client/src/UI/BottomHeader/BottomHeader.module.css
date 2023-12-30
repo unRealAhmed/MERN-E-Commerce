@@ -85,6 +85,7 @@
   gap: 1.6rem;
 }
 
+.navList a,
 .navList button {
   display: flex;
   align-items: center;
@@ -93,11 +94,13 @@
   border: none;
 }
 
+.navList a span,
 .navList button span {
   font-size: 1.4rem;
   color: #323232;
 }
 
+.navList a svg,
 .navList button svg {
   font-size: 2.4rem;
   color: #ccc;
