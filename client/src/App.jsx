@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Shop from "./UI/shop/Shop";
 
+
 const App = () => {
   return (
     <div className="app">
