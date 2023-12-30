@@ -1,0 +1,46 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 0.7rem;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 100;
+  margin-bottom: 1.6rem;
+}
+
+select {
+  padding: 0.8rem 0;
+  width: 22rem;
+  outline: none;
+}
+
+.priceContainer {
+  display: grid;
+  grid-template-columns: 25rem 5fr;
+  gap: 3.2rem;
+  margin-bottom: 2.4rem;
+}
+
+.shopcontent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+@media only screen and (max-width: 912px) {
+  .priceContainer {
+    flex-direction: column;
+    margin-left: 10rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .priceContainer {
+    flex-direction: column;
+    margin-left: 5rem;
+  }
+}
