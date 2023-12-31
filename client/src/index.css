@@ -90,5 +90,5 @@ h5,
 h6 {
   overflow-wrap: break-word;
   hyphens: auto;
-  color: #262626 !important;
+  color: #262626;
 }
