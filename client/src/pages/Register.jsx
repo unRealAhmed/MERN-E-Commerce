@@ -27,7 +27,7 @@ const Register = () => {
       <div>
         <div className={styles.Subscribe}>
           <input type="checkbox" />
-          <span>Subscribe to newsletter</span>
+          <span className={styles.sub}>Subscribe to newsletter</span>
         </div>
         <div className={styles.signlink}>
           <button className={styles.btn}>Sign up </button>
