@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema(
       ref: 'Merchant',
       default: null,
     },
+    wishlist:[{type:mongoose.Types.ObjectId ,ref:'User'}]
   },
   {
     timestamps: true,
