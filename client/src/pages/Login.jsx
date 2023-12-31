@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Container from "../UI/container/Container";
 import styles from "./Login.module.css";
-import Loginbuttons from "./components/Loginbuttons";
+import Loginbuttons from "../UI/Loginbuttons/Loginbuttons";
+// import Loginbuttons from "./components/Loginbuttons";
 const Login = () => {
   return (
     <Container>
