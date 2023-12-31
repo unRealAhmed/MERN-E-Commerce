@@ -1,0 +1,102 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-left: 1.2rem;
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1.6rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+form {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+button {
+  display: inline-block;
+  height: 4.5rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border: 1px solid #e4e6eb;
+  font-size: 1.5rem !important;
+  color: #323232;
+  border-radius: 0 3px 3px 0px;
+  background-color: #fff;
+  transition: all 0.2s ease-in;
+}
+
+button:hover {
+  background-color: var(--blue);
+  color: #fff;
+}
+
+form label {
+  margin-bottom: 5px;
+  color: #323232;
+  font-size: 14px;
+}
+
+form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #e4e6eb;
+  font-size: 12px;
+  color: #323232;
+  border-radius: 3px;
+  transition: 0.3s;
+  cursor: text;
+  margin-bottom: 1.2rem;
+}
+
+input[type="checkbox"] {
+  height: 2rem;
+  width: 2rem;
+  color: #2962ff;
+  cursor: pointer;
+  accent-color: #e4e6eb;
+}
+.signlink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.4rem;
+}
+
+.forgot {
+  color: #2962ff;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  border: none;
+}
+
+.forgot:hover {
+  color: #323232;
+  background-color: #fff;
+}
+
+.createAcc {
+  padding: 10px 16px;
+  font-size: 1.4rem;
+}
+.createAcc:hover {
+  color: #6c757d;
+}
+
+.logbuttons {
+  display: flex;
+  gap: 1rem;
+}
