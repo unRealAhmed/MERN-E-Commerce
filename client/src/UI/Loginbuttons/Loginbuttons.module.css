@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 
-svg {
+.link svg {
   overflow: hidden;
   vertical-align: middle;
 }
@@ -20,13 +20,13 @@ svg {
   height: 100%;
 }
 
-span {
+.loginWith {
   font-size: 1.4rem;
   color: #323232;
   margin-left: 5px;
 }
 
-a {
+.link {
   padding: 12px 20px;
   /* margin: auto; */
   display: flex;

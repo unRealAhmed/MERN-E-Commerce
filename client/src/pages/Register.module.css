@@ -6,11 +6,13 @@
   align-items: center;
   flex-direction: column;
 }
-h2 {
+
+.secondaryHeading {
   font-size: 2rem;
   font-weight: 600;
   margin-left: 1.2rem;
 }
+
 hr {
   margin-top: 1rem;
   margin-bottom: 1.6rem;
@@ -18,13 +20,13 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-form {
+.form {
   margin-left: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-button {
+.btn {
   display: inline-block;
   height: 4.5rem;
   font-weight: 700;
@@ -37,18 +39,18 @@ button {
   transition: all 0.2s ease-in;
 }
 
-button:hover {
+.btn:hover {
   background-color: var(--blue);
   color: #fff;
 }
 
-form label {
+.form label {
   margin-bottom: 5px;
   color: #323232;
   font-size: 14px;
 }
 
-form input {
+.form input {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #e4e6eb;
@@ -60,13 +62,14 @@ form input {
   margin-bottom: 1.2rem;
 }
 
-input[type="checkbox"] {
+.form input[type="checkbox"] {
   height: 2rem;
   width: 2rem;
   color: #2962ff;
   cursor: pointer;
   accent-color: #e4e6eb;
 }
+
 .Subscribe {
   display: flex;
   justify-content: start;

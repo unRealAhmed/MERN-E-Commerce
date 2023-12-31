@@ -1,15 +1,15 @@
 import styles from "./Register.module.css";
 import Container from "../UI/container/Container";
-import Loginbuttons from "./components/Loginbuttons";
 import { Link } from "react-router-dom";
+import Loginbuttons from "../UI/Loginbuttons/Loginbuttons";
 
 const Register = () => {
   return (
     <Container>
-      <h2>sign up</h2>
+      <h2 className={styles.secondaryHeading}>sign up</h2>
       <hr />
       <div className={styles.main}>
-        <form>
+        <form className={styles.form}>
           <label>Email Address</label>
           <input placeholder="Please Enter Your Email" />
           <label>First Name</label>
@@ -30,7 +30,7 @@ const Register = () => {
           <span>Subscribe to newsletter</span>
         </div>
         <div className={styles.signlink}>
-          <button>Sign up </button>
+          <button className={styles.btn}>Sign up </button>
           <button className={styles.back}>
             <Link to="/login">Back to login</Link>
           </button>
