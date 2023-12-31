@@ -1,0 +1,39 @@
+.icon {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.items {
+  margin: 4.8rem;
+  padding: 4.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  height: 100%;
+}
+
+span {
+  font-size: 1.4rem;
+  color: #323232;
+  margin-left: 5px;
+}
+
+a {
+  padding: 12px 20px;
+  /* margin: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  max-width: 350px;
+  border: 1px solid #eceef3;
+  border-radius: 3px;
+}
