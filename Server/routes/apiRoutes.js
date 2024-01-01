@@ -10,6 +10,7 @@ const reviewRoutes = require(`./api/review`);
 const addressRoutes = require(`./api/address`);
 const merchantRoutes = require(`./api/merchant`);
 const wishlistRouter = require('./api/wishlist');
+const cartRouter = require('./api/cart');
 
 router.use(`${baseURL}/auth`, authRoutes);
 router.use(`${baseURL}/users`, userRoutes);
@@ -20,5 +21,6 @@ router.use(`${baseURL}/reviews`, reviewRoutes);
 router.use(`${baseURL}/address`, addressRoutes);
 router.use(`${baseURL}/merchant`, merchantRoutes);
 router.use(`${baseURL}/wishlists`, wishlistRouter);
+router.use(`${baseURL}/cart`, cartRouter);
 
 module.exports = router;
