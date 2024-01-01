@@ -7,7 +7,7 @@ const productSchema = mongoose.Schema({
         unique: [true, "The Name had Written Before"],
         required: true
     },
-    descriptions: {
+    description: {
         type: String,
         minlength: [3, "the discription is Too Short"],
         maxlength: [100, "the discription is Too long"],
@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 1
     },
-    slod: {
+    sold: {
         type: Number,
         default: 0
     },
@@ -57,8 +57,6 @@ const productSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "brand"
     }
-
-
 }, {
     timestamps: true,
     toJSON: { virtuals: true },
