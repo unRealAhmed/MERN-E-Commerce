@@ -28,11 +28,10 @@ exports.getAllUsers = asyncHandler(async (req, res, next) => {
 exports.getMe = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
 
-  const user = await User.findById(userId, { password: 0, passwordChangedAt: 0 });
+  const user = await User.findById(userId)
+    .populate('merchant', 'business brandName status');
 
-  res.status(200).json({
-    user
-  });
+  res.status(200).json({ user });
 });
 
 exports.updateCurrentUser = asyncHandler(async (req, res, next) => {
