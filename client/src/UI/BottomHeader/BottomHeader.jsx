@@ -16,7 +16,7 @@ const BottomHeader = () => {
     let handler = () => {
       setSidebar(false);
     };
-    document.addEventListener("mousedown", handler);
+    document.querySelector(".main").addEventListener("mousedown", handler);
   });
   return (
     <Container>
@@ -52,6 +52,10 @@ const BottomHeader = () => {
                 </li>
               </ul>
             </div>
+            <div
+              className={sidebar ? `${styles.darkBlur}` : ``}
+              onClick={showSidebar}
+            ></div>
           </div>
           <p className={styles.menuTitle}>
             <Link to="/">MERN Store</Link>
