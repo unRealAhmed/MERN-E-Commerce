@@ -6,9 +6,13 @@ const APIFeatures = require("../utils/apiFeatures");
 
 
 const addProduct = asyncHandler(async (req, res, next) => {
+    req.body.userId=req.user._id
     req.body.slug = slugify(req.body.name);
-    req.body.imgCover = req.files.imgcover[0].filename;
-    req.body.images = req.files.images.map((ele) => ele.filename);
+    if(req.files){
+        req.body.imgCover = req.files.imgcover[0].filename;
+        req.body.images = req.files.images.map((ele) => ele.filename);
+    }
+    
     const product = new productModel(req.body);
     await product.save();
     res.json({ message: "success", product });

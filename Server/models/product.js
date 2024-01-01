@@ -45,9 +45,9 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
-    userId: {
+    user: {
         type: mongoose.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
     categoryId: {
         type: mongoose.Types.ObjectId,
