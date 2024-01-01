@@ -1,28 +1,22 @@
 const express = require('express');
-const { protect } = require('../../controllers/auth');
+const { protect, restrictTo } = require('../../controllers/auth');
 const {
   signupMerchant,
-  addMerchant,
-  searchMerchants,
-  getAllMerchants,
-  disableMerchantAccount,
+  createMerchantBrand,
+  getAllMerchant,
   approveMerchant,
-  rejectMerchant,
-  deleteMerchant
+  getMerchantsWaitingApproval
 } = require('../../controllers/merchant');
 
 const router = express.Router();
 
-router.post('/signup', signupMerchant);
-
 router.use(protect);
 
-router.post('/add', addMerchant);
-router.get('/search', searchMerchants);
-router.get('/all', getAllMerchants);
-router.put('/disable/:id', disableMerchantAccount);
-router.put('/approve/:id', approveMerchant);
-router.put('/reject/:id', rejectMerchant);
-router.delete('/delete/:id', deleteMerchant);
+router.post('/signup', restrictTo('user'), signupMerchant);
+router.post('/add-brand', restrictTo('merchant'), createMerchantBrand);
+router.get('/', restrictTo('admin'), getAllMerchant);
+router.patch('/approve/:merchantId', restrictTo('admin'), approveMerchant);
+router.patch('/reject/:merchantId', restrictTo('admin'), approveMerchant);
+router.get('/waiting-approval', restrictTo('admin'), getMerchantsWaitingApproval);
 
 module.exports = router;
