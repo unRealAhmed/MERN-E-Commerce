@@ -106,3 +106,109 @@
   color: #ccc;
   stroke: #ccc;
 }
+
+.nav > li:focus{
+  color: #000;
+}
+
+/* Dropdown */
+.dropdown{
+  position: relative;
+}
+
+.dropdownMenu{
+  position: absolute;
+  left: 0;
+  top: calc(100%-0.25rem);
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 150ms ease-in-out;
+  pointer-events: none;
+  width: 300%;
+  font-size: 1.5rem;
+}
+
+.dropdownMenutwo{
+  position: absolute;
+  left: 0;
+  top: calc(100%-0.25rem);
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 150ms ease-in-out;
+  pointer-events: none;
+  width: 150%;
+  font-size: 1.5rem;
+}
+
+.dropdown > button:focus + .dropdownMenu{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown > button:focus + .dropdownMenutwo{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
+
+.dropdownContent{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+
+.dropdownContent ul li{
+  padding: 1rem;
+  cursor: pointer;
+  
+  position: relative;
+}
+
+.dropdownContent ul li::after{
+  content: '';
+  display: block;
+  width: 90%;
+  height: 2px;
+  background-color: blue;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.dropdownContent ul li:hover::after{
+  transform: scaleX(1);
+}
+
+.dropdownHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid blue;
+  padding: 1rem;
+}
+
+.dropspan{
+  padding: 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dropspan:hover{
+  background-color: #c3c1c1;
+  width: 100%;
+  text-align: center;
+}
