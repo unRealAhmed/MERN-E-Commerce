@@ -19,12 +19,12 @@ const getAllCategories = asyncHandler(async (req, res, next) => {
 
 const addCategory = asyncHandler(async (req, res, next) => {
     req.body.slug = slugify(req.body.name);
-    req.body.img = req.file.filename;
 
     const category = new categoryModel(req.body);
     await category.save();
     res.json({ success: true, category });
 });
+
 
 const specificCategory = asyncHandler(async (req, res, next) => {
     const { id } = req.params;

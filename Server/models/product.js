@@ -46,9 +46,9 @@ const productSchema = mongoose.Schema(
             type: Number,
             default: 0,
         },
-        user: {
+        merchant: {
             type: mongoose.Types.ObjectId,
-            ref: 'User',
+            ref: 'Merchant',
         },
         categoryId: {
             type: mongoose.Types.ObjectId,

@@ -9,10 +9,6 @@ const categorySchema = mongoose.Schema({
     },
     slug: String,
     img: String,
-    userId: {
-        type: mongoose.Types.ObjectId,
-        ref: 'user',
-    },
 });
 
 categorySchema.post('init', (ele) => {
