@@ -36,6 +36,10 @@ const productValidationSchema = Joi.object({
     'number.base': 'Price after discount must be a number',
   }),
 
+  slug: Joi.string().allow('').optional(),
+  categoryId: Joi.string().allow('').optional(),
+  brandId: Joi.string().allow('').optional(),
+
 }).options({ abortEarly: false });
 
 module.exports = productValidationSchema;

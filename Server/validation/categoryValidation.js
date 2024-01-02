@@ -8,6 +8,7 @@ const categoryValidationSchema = Joi.object({
     'string.min': 'Name is too short. Minimum length is {#limit} characters',
     'string.max': 'Name is too long. Maximum length is {#limit} characters',
   }),
+  img: Joi.string().allow('').optional(),
 }).options({ abortEarly: false });
 
 module.exports = categoryValidationSchema;
