@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 1
     },
-    slod: {
+    sold: {
         type: Number,
         default: 0
     },
