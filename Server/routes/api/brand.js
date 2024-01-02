@@ -1,13 +1,30 @@
-const express =require('express')
-const { fileUploadsingle } = require('../../middleware/fileUpload')
-const { addbrand, getAllbrands, spacificbrand, updatebrand, deletebrand } = require('../../controllers/brand')
+const express = require('express');
+const { fileUploadsingle } = require('../../middleware/fileUpload');
+const {
+  addBrand,
+  getAllBrands,
+  specificBrand,
+  updateBrand,
+  deleteBrand
+} = require('../../controllers/brand');
+const validate = require('../../middleware/validation');
+const brandSchema = require('../../validation/brandValidation');
+const { protect, restrictTo } = require('../../controllers/auth');
 
-const brandRouter =express.Router()
-brandRouter.post('/',fileUploadsingle('image','brand'),addbrand)
-brandRouter.get('/',getAllbrands)
-brandRouter.get('/:id',spacificbrand)
-brandRouter.put('/:id',updatebrand)
-brandRouter.delete('/:id',deletebrand)
+const brandRouter = express.Router();
 
+brandRouter.post(
+  '/',
+  protect,
+  restrictTo('admin', 'merchant'),
+  validate(brandSchema),
+  fileUploadsingle('image', 'brand'),
+  addBrand
+);
 
-module.exports =brandRouter
+brandRouter.get('/', getAllBrands);
+brandRouter.get('/:id', specificBrand);
+brandRouter.put('/:id', protect, restrictTo('admin', 'merchant'), updateBrand);
+brandRouter.delete('/:id', protect, restrictTo('admin', 'merchant'), deleteBrand);
+
+module.exports = brandRouter;

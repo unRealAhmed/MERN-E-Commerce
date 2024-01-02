@@ -1,12 +1,14 @@
-const express =require('express')
-const { addToCart, updateQuantity, removeProductFromCart, getuserCart } = require('../../controllers/cart')
-const { protect } = require('../../controllers/auth')
+const express = require('express');
+const { addToCart, updateQuantity, removeProductFromCart, getUserCart } = require('../../controllers/cart');
+const { protect } = require('../../controllers/auth');
 
-const cartRouter =express.Router()
-cartRouter.post('/',protect,addToCart)
-cartRouter.get('/',protect,getuserCart)
-cartRouter.put('/:product',protect,updateQuantity)
-cartRouter.delete('/:product',protect,removeProductFromCart)
+const cartRouter = express.Router();
 
+cartRouter.use(protect);
 
-module.exports =cartRouter
+cartRouter.post('/', addToCart);
+cartRouter.get('/', getUserCart);
+cartRouter.put('/:product', updateQuantity);
+cartRouter.delete('/:product', removeProductFromCart);
+
+module.exports = cartRouter;

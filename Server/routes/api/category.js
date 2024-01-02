@@ -1,13 +1,30 @@
-const express =require('express')
-const { fileUploadsingle } = require('../../middleware/fileUpload')
-const { addcategory, getAllcategorys, spacificcategory, updatecategory, deletecategory } = require('../../controllers/category')
+const express = require('express');
+const { fileUploadsingle } = require('../../middleware/fileUpload');
+const validate = require('../../middleware/validation');
+const categorySchema = require('../../validation/categoryValidation');
+const { protect, restrictTo } = require('../../controllers/auth');
+const {
+  addCategory,
+  getAllCategories,
+  specificCategory,
+  updateCategory,
+  deleteCategory
+} = require('../../controllers/category');
 
-const categoryRouter =express.Router()
+const categoryRouter = express.Router();
 
-categoryRouter.post('/',fileUploadsingle('image','category'),addcategory)
-categoryRouter.get('/',getAllcategorys)
-categoryRouter.get('/:id',spacificcategory)
-categoryRouter.put('/:id',updatecategory)
-categoryRouter.delete('/:id',deletecategory)
+categoryRouter.post(
+  '/',
+  protect,
+  restrictTo('admin'),
+  fileUploadsingle('image', 'category'),
+  validate(categorySchema),
+  addCategory
+);
 
-module.exports=categoryRouter
+categoryRouter.get('/', getAllCategories);
+categoryRouter.get('/:id', specificCategory);
+categoryRouter.put('/:id', protect, restrictTo('admin'), updateCategory);
+categoryRouter.delete('/:id', protect, restrictTo('admin'), deleteCategory);
+
+module.exports = categoryRouter;

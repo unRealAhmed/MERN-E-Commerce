@@ -9,15 +9,14 @@ const {
   deleteReview
 } = require('../../controllers/review');
 
-router.use(protect)
 
 router.route('/')
-  .post(createReview)
+  .post(protect, createReview)
   .get(getAllReviews);
 
 router.route('/:id')
   .get(getSingleReview)
-  .patch(updateReview)
-  .delete(deleteReview);
+  .patch(protect, updateReview)
+  .delete(protect, deleteReview);
 
 module.exports = router;

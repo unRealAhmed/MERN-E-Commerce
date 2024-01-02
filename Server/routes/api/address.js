@@ -4,20 +4,21 @@ const {
   getAllAddresses,
   getSingleAddress,
   updateAddress,
-  deleteAddress } = require('../../controllers/address');
+  deleteAddress
+} = require('../../controllers/address');
 const { protect } = require('../../controllers/auth');
 
-const router = express.Router();
+const addressRouter = express.Router();
 
-router.use(protect)
+addressRouter.use(protect);
 
-router.route('/')
+addressRouter.route('/')
   .post(createAddress)
   .get(getAllAddresses);
 
-router.route('/:id')
+addressRouter.route('/:id')
   .get(getSingleAddress)
   .patch(updateAddress)
   .delete(deleteAddress);
 
-module.exports = router;
+module.exports = addressRouter;
