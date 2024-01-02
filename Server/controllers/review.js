@@ -1,20 +1,20 @@
-const Review = require('../models/Review')
-const Product = require('../models/product')
-const asyncHandler = require('../utils/asyncHandler')
-const AppError = require('../utils/appErrors')
-const APIFeatures = require('../utils/apiFeatures')
+const Review = require('../models/Review');
+const Product = require('../models/product');
+const asyncHandler = require('../utils/asyncHandler');
+const AppError = require('../utils/appErrors');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.createReview = asyncHandler(async (req, res, next) => {
   const productId = req.body.product;
   const { user } = req;
 
   if (!req.body.product) {
-    return next(new AppError('Product ID is required for creating a review.', 400))
+    return next(new AppError('Product ID is required for creating a review.', 400));
   }
 
-  const productFound = await Product.findById(productId)
+  const productFound = await Product.findById(productId);
   if (!productFound) {
-    return next(new AppError("Product Not Found", 404))
+    return next(new AppError('Product Not Found', 404));
   }
 
   const existingReview = await Review.findOne({ product: productId, user: user._id });
@@ -29,8 +29,8 @@ exports.createReview = asyncHandler(async (req, res, next) => {
     product: productId,
   });
 
-  res.status(200).json({
-    status: 'success',
+  res.status(201).json({
+    success: true,
     message: `Your review has been added successfully and will appear when approved!`,
     data: {
       review: newReview,
@@ -38,7 +38,7 @@ exports.createReview = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.getAllReviews = asyncHandler(async (req, res) => {
+exports.getAllReviews = asyncHandler(async (req, res, next) => {
   const apiFeatures = new APIFeatures(Review.find(), req.query)
     .paginate();
 
@@ -47,6 +47,7 @@ exports.getAllReviews = asyncHandler(async (req, res) => {
   const count = await Review.countDocuments();
 
   res.status(200).json({
+    success: true,
     reviews,
     totalPages: Math.ceil(count / apiFeatures.queryString.limit),
     currentPage: Number(apiFeatures.queryString.page),
@@ -54,18 +55,17 @@ exports.getAllReviews = asyncHandler(async (req, res) => {
   });
 });
 
-
 exports.getSingleReview = asyncHandler(async (req, res, next) => {
   const reviewId = req.params.id;
 
   const review = await Review.findById(reviewId);
 
   if (!review) {
-    return next(new AppError('Review not found', 404));
+    return next(new AppError(`Review with ID ${reviewId} not found`, 404));
   }
 
   res.status(200).json({
-    status: 'success',
+    success: true,
     data: {
       review,
     },
@@ -86,11 +86,11 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
   );
 
   if (!updatedReview) {
-    return next(new AppError('Review not found', 404));
+    return next(new AppError(`Review with ID ${reviewId} not found`, 404));
   }
 
   res.status(200).json({
-    status: 'success',
+    success: true,
     data: {
       review: updatedReview,
     },
@@ -103,11 +103,11 @@ exports.deleteReview = asyncHandler(async (req, res, next) => {
   const deletedReview = await Review.findByIdAndDelete(reviewId);
 
   if (!deletedReview) {
-    return next(new AppError('Review not found', 404));
+    return next(new AppError(`Review with ID ${reviewId} not found`, 404));
   }
 
   res.status(204).json({
-    status: 'success',
+    success: true,
     data: null,
   });
 });

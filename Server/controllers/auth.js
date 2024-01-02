@@ -58,7 +58,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return next(new AppError('Please provide valid email and password.', 400));
+    return next(new AppError('Invalid credentials.', 400));
   }
 
   const user = await User.findOne({ email }).select('+password +active');

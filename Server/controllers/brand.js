@@ -4,16 +4,7 @@ const AppError = require("../utils/appErrors");
 const brandModel = require("../models/Brand");
 const APIFeatures = require("../utils/apiFeatures");
 
-const addbrand = asyncHandler(async (req, res, next) => {
-    req.body.slug = slugify(req.body.name);
-    req.body.logo = req.file.filename;
-
-    const brand = new brandModel(req.body);
-    await brand.save();
-    res.json({ message: "success", brand });
-});
-
-const getAllbrands = asyncHandler(async (req, res, next) => {
+const getAllBrands = asyncHandler(async (req, res, next) => {
     const apiFeatures = new APIFeatures(brandModel.find({}), req.query)
         .filter()
         .sort()
@@ -26,34 +17,57 @@ const getAllbrands = asyncHandler(async (req, res, next) => {
     res.json({ message: 'success', brands });
 });
 
-const spacificbrand = asyncHandler(async (req, res, next) => {
-    const { id } = req.params;
-    const brand = await brandModel.findById(id);
-    !brand && next(new AppError("brand Not Found", 403));
-    brand && res.json({ message: "success", brand });
+const addBrand = asyncHandler(async (req, res, next) => {
+    req.body.slug = slugify(req.body.name);
+    req.body.logo = req.file.filename;
+
+    const brand = new brandModel(req.body);
+    await brand.save();
+    res.json({ success: true, brand });
 });
 
-const updatebrand = asyncHandler(async (req, res, next) => {
+const specificBrand = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
+    const brand = await brandModel.findById(id);
+
+    if (!brand) {
+        return next(new AppError(`Brand with ID ${id} not found`, 404));
+    }
+
+    res.json({ success: true, brand });
+});
+
+const updateBrand = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+
     if (req.body.name) {
         req.body.slug = slugify(req.body.name);
     }
+
     const brand = await brandModel.findByIdAndUpdate(id, req.body, { new: true });
-    !brand && next(new AppError("brand Not Found", 403));
-    brand && res.json({ message: "success", brand });
+
+    if (!brand) {
+        return next(new AppError(`Brand with ID ${id} not found`, 404));
+    }
+
+    res.json({ success: true, brand });
 });
 
-const deletebrand = asyncHandler(async (req, res, next) => {
+const deleteBrand = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const brand = await brandModel.findByIdAndDelete(id);
-    !brand && next(new AppError("brand Not Found", 403));
-    brand && res.json({ message: "success", brand });
+
+    if (!brand) {
+        return next(new AppError(`Brand with ID ${id} not found`, 404));
+    }
+
+    res.json({ success: true, brand });
 });
 
 module.exports = {
-    addbrand,
-    getAllbrands,
-    spacificbrand,
-    updatebrand,
-    deletebrand
+    addBrand,
+    getAllBrands,
+    specificBrand,
+    updateBrand,
+    deleteBrand
 };
