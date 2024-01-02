@@ -44,6 +44,14 @@ exports.createMerchantBrand = asyncHandler(async (req, res) => {
 
   const currentMerchant = await Merchant.findById(req.user.merchant);
 
+  if (!currentMerchant) {
+    throw new AppError('Merchant not found for the logged-in user.', 404);
+  }
+
+  if (currentMerchant.status !== 'Approved') {
+    throw new AppError('Merchant is not approved and cannot create a brand.', 403);
+  }
+
   const newBrand = await Brand.create({
     name: brandName,
     merchant: currentMerchant.id,
@@ -140,58 +148,3 @@ exports.getMerchantsWaitingApproval = asyncHandler(async (req, res) => {
 
   res.status(200).json({ success: true, count: formattedMerchants.length, merchants: formattedMerchants });
 });
-
-// exports.signupMerchant = asyncHandler(async (req, res) => {
-//   const { email, firstName, lastName, password } = req.body;
-
-//   if (!email || !firstName || !lastName || !password) {
-//     throw new AppError('Please provide all required information.', 400);
-//   }
-
-//   const userDoc = await User.findOne({
-//     email,
-//     resetPasswordToken: req.params.token
-//   });
-
-//   const salt = await bcrypt.genSalt(10);
-//   const hash = await bcrypt.hash(password, salt);
-
-//   const query = { _id: userDoc._id };
-//   const update = {
-//     email,
-//     firstName,
-//     lastName,
-//     password: hash,
-//     resetPasswordToken: undefined
-//   };
-
-//   await User.findOneAndUpdate(query, update, {
-//     new: true
-//   });
-
-//   const merchantDoc = await Merchant.findOne({
-//     email
-//   });
-
-//   await createMerchantBrand(merchantDoc);
-
-//   res.status(200).json({ success: true });
-// });
-
-// exports.deleteMerchant = asyncHandler(async (req, res) => {
-//   const merchantId = req.params.id;
-
-//   await deactivateBrand(merchantId);
-
-//   const deletedMerchant = await Merchant.findByIdAndDelete(merchantId);
-
-//   if (!deletedMerchant) {
-//     throw new AppError('Merchant not found', 404);
-//   }
-
-//   res.status(200).json({
-//     success: true,
-//     message: 'Merchant has been deleted successfully!',
-//     merchant: deletedMerchant
-//   });
-// });

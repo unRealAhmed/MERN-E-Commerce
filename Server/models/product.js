@@ -4,13 +4,11 @@ const productSchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        unique: [true, "The Name had Written Before"],
+        unique: true,
         required: true
     },
     description: {
         type: String,
-        minlength: [3, "the discription is Too Short"],
-        maxlength: [100, "the discription is Too long"],
         required: true
     },
     slug: {

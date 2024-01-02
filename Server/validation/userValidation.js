@@ -11,14 +11,24 @@ const userValidationSchema = Joi.object({
 
   phoneNumber: Joi.string(),
 
-  fullname: Joi.string().min(3).max(25).trim().regex(/^[a-zA-Z\s]+$/).required()
+  firstname: Joi.string().min(3).max(25).trim().regex(/^[a-zA-Z\s]+$/).required()
     .messages({
-      'string.base': 'Fullname must be a string',
-      'string.empty': 'Fullname is required',
-      'string.min': 'Fullname should have at least {#limit} characters',
-      'string.max': 'Fullname should have at most {#limit} characters',
-      'string.pattern.base': 'Fullname must only contain alphabetic characters and spaces',
-      'any.required': 'Fullname is required',
+      'string.base': 'Firstname must be a string',
+      'string.empty': 'Firstname is required',
+      'string.min': 'Firstname should have at least {#limit} characters',
+      'string.max': 'Firstname should have at most {#limit} characters',
+      'string.pattern.base': 'Firstname must only contain alphabetic characters and spaces',
+      'any.required': 'Firstname is required',
+    }),
+
+  lastname: Joi.string().min(3).max(25).trim().regex(/^[a-zA-Z\s]+$/).required()
+    .messages({
+      'string.base': 'Lastname must be a string',
+      'string.empty': 'Lastname is required',
+      'string.min': 'Lastname should have at least {#limit} characters',
+      'string.max': 'Lastname should have at most {#limit} characters',
+      'string.pattern.base': 'Lastname must only contain alphabetic characters and spaces',
+      'any.required': 'Lastname is required',
     }),
 
   password: Joi.string().min(6).required()
@@ -31,7 +41,6 @@ const userValidationSchema = Joi.object({
 
   role: Joi.string().valid('admin', 'user', 'merchant').default('user'),
 
-  merchant: Joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null),
 });
 
 module.exports = userValidationSchema;

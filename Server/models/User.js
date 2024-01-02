@@ -11,8 +11,15 @@ const userSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
     },
-    fullname: {
+    firstname: {
       type: String,
+      required: true,
+      trim: true,
+    },
+    lastname: {
+      type: String,
+      required: true,
+      trim: true,
     },
     password: {
       type: String,
@@ -31,7 +38,7 @@ const userSchema = new mongoose.Schema(
       ref: 'Merchant',
       default: null,
     },
-    wishlist:[{type:mongoose.Types.ObjectId ,ref:'User'}]
+    wishlist: [{ type: mongoose.Types.ObjectId, ref: 'User' }]
   },
   {
     timestamps: true,
