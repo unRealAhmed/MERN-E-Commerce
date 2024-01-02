@@ -7,7 +7,7 @@ const productValidationSchema = Joi.object({
     'any.required': 'Name is required',
   }),
 
-  descriptions: Joi.string()
+  description: Joi.string()
     .min(3, 'utf8')
     .max(100, 'utf8')
     .required()
