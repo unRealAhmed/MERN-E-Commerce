@@ -4,29 +4,29 @@ const addressSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
     },
     address: {
-      type: String
+      type: String,
     },
     city: {
-      type: String
+      type: String,
     },
     state: {
-      type: String
+      type: String,
     },
     country: {
-      type: String
+      type: String,
     },
     zipCode: {
-      type: String
-    }
+      type: String,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
 const Address = mongoose.model('Address', addressSchema);
 
-module.exports = Address
+module.exports = Address;

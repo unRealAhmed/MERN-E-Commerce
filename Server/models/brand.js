@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 
-const brandSchema = mongoose.Schema({
-    name: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: true
+const brandSchema = mongoose.Schema(
+    {
+        name: {
+            type: String,
+            trim: true,
+            unique: true,
+            required: true,
+        },
+        slug: String,
+        logo: String,
+        merchant: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Merchant',
+        },
     },
-    slug: String,
-    logo: String,
-    merchant: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Merchant'
-    }
-}, { timestamps: true });
+    { timestamps: true }
+);
 
 brandSchema.post('init', function (doc) {
     doc.logo = 'http://localhost:3000/' + 'brand/' + doc.logo;

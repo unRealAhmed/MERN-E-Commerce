@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Product = require('./product');
 
-
 const reviewSchema = new mongoose.Schema(
   {
     user: {
@@ -20,8 +19,9 @@ const reviewSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
@@ -38,28 +38,23 @@ reviewSchema.pre(/^find/, function (next) {
 reviewSchema.statics.calcAverageRatings = async function (productId) {
   const stats = await this.aggregate([
     {
-      $match: { product: productId }
+      $match: { product: productId },
     },
     {
       $group: {
         _id: '$product',
         nRating: { $sum: 1 },
-        avgRating: { $avg: '$rating' }
-      }
-    }
+        avgRating: { $avg: '$rating' },
+      },
+    },
   ]);
 
-  if (stats.length > 0) {
-    await Product.findByIdAndUpdate(productId, {
-      numOfReviews: stats[0].nRating,
-      averageRating: stats[0].avgRating
-    });
-  } else {
-    await Product.findByIdAndUpdate(productId, {
-      numOfReviews: 0,
-      averageRating: 0
-    });
-  }
+  const updateFields = {
+    numOfReviews: stats.length > 0 ? stats[0].nRating : 0,
+    averageRating: stats.length > 0 ? stats[0].avgRating : 0,
+  };
+
+  await Product.findByIdAndUpdate(productId, updateFields);
 };
 
 reviewSchema.post('save', function () {
@@ -77,4 +72,4 @@ reviewSchema.post(/^findOneAnd/, async function () {
 
 const Review = mongoose.model('Review', reviewSchema);
 
-module.exports = Review
+module.exports = Review;

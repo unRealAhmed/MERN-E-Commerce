@@ -1,40 +1,45 @@
-const mongoose =require('mongoose')
+const mongoose = require('mongoose');
 
-const orderSchema =mongoose.Schema({
-    user:{
-        type:mongoose.Types.ObjectId ,
-        ref:'User'
-    } ,
-    cartItems:[
-        {
-            product:{type:mongoose.Types.ObjectId ,ref:'product'},
-            quantity:Number ,
-            price:Number
-        } 
-    ] ,
-    totalPriceOfOrder:Number ,
-    shippingAdress:{
-        street:String ,
-        city:String ,
-        phone:Number
-    } ,
-    isPiad:{
-        type:Boolean ,
-        default:false
-    } ,
-    piadAt:Date ,
-    isDilevered:{
-        type:Boolean ,
-        default:false
-    } ,
-    DileveredAt:Date ,
-    paymentmethod:{
-        type:String ,
-        enum:['cash','card'] ,
-        default:'cash'
+const orderSchema = mongoose.Schema(
+    {
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+        },
+        cartItems: [
+            {
+                product: { type: mongoose.Types.ObjectId, ref: 'Product' },
+                quantity: Number,
+                price: Number,
+            },
+        ],
+        totalPriceOfOrder: Number,
+        shippingAddress: {
+            street: String,
+            city: String,
+            phone: Number,
+        },
+        isPaid: {
+            type: Boolean,
+            default: false,
+        },
+        paidAt: Date,
+        isDelivered: {
+            type: Boolean,
+            default: false,
+        },
+        deliveredAt: Date,
+        paymentMethod: {
+            type: String,
+            enum: ['cash', 'card'],
+            default: 'cash',
+        },
+    },
+    {
+        timestamps: true,
     }
-})
+);
 
-const orderModel =mongoose.model('order',orderSchema)
+const Order = mongoose.model('Order', orderSchema);
 
-module.exports =orderModel
+module.exports = Order;

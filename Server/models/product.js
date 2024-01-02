@@ -1,70 +1,75 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const productSchema = mongoose.Schema({
-    name: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: true
+const productSchema = mongoose.Schema(
+    {
+        name: {
+            type: String,
+            trim: true,
+            unique: true,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        slug: {
+            type: String,
+            required: true,
+        },
+        quantity: {
+            type: Number,
+            default: 1,
+        },
+        sold: {
+            type: Number,
+            default: 0,
+        },
+        price: {
+            type: Number,
+            required: true,
+        },
+        priceAfterDiscount: {
+            type: Number,
+        },
+        imgCover: String,
+        images: [
+            {
+                type: String,
+            },
+        ],
+        averageRating: {
+            type: Number,
+            default: 0,
+            set: (val) => +val.toFixed(1),
+        },
+        numOfReviews: {
+            type: Number,
+            default: 0,
+        },
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+        },
+        categoryId: {
+            type: mongoose.Types.ObjectId,
+            ref: 'category',
+        },
+        brandId: {
+            type: mongoose.Types.ObjectId,
+            ref: 'brand',
+        },
     },
-    description: {
-        type: String,
-        required: true
-    },
-    slug: {
-        type: String,
-        required: true
-    },
-    quantity: {
-        type: Number,
-        default: 1
-    },
-    sold: {
-        type: Number,
-        default: 0
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    priceAfterDiscount: {
-        type: Number
-    },
-    imgCover: String,
-    images: [{
-        type: String
-    }],
-    averageRating: {
-        type: Number,
-        default: 0,
-        set: (val) => +val.toFixed(1),
-    },
-    numOfReviews: {
-        type: Number,
-        default: 0,
-    },
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: "User"
-    },
-    categoryId: {
-        type: mongoose.Types.ObjectId,
-        ref: "category"
-    },
-    brandId: {
-        type: mongoose.Types.ObjectId,
-        ref: "brand"
+    {
+        timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
     }
-}, {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
-})
+);
 
 productSchema.post('init', (ele) => {
-    ele.imgCover = 'http://localhost:3000/' + 'product/' + ele.imgCover
-    ele.images = ele.images.map((ele) => 'http://localhost:3000/' + 'product/' + ele)
-})
+    ele.imgCover = 'http://localhost:3000/' + 'product/' + ele.imgCover;
+    ele.images = ele.images.map((ele) => 'http://localhost:3000/' + 'product/' + ele);
+});
 
 productSchema.virtual('reviews', {
     ref: 'Review',
@@ -79,10 +84,10 @@ productSchema.pre(/^findOne/, function (next) {
     }).populate({
         path: 'reviews',
         select: 'review rating',
-    })
+    });
     next();
 });
 
-const productModel = mongoose.model('product', productSchema)
+const Product = mongoose.model('Product', productSchema);
 
-module.exports = productModel
+module.exports = Product;

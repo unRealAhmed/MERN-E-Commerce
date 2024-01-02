@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs')
-const crypto = require("crypto");
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,9 +8,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
-    phoneNumber: {
-      type: String,
-    },
+    phoneNumber: String,
     firstname: {
       type: String,
       required: true,
@@ -38,23 +36,15 @@ const userSchema = new mongoose.Schema(
       ref: 'Merchant',
       default: null,
     },
-    wishlist: [{ type: mongoose.Types.ObjectId, ref: 'User' }]
+    wishlist: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
   },
   {
     timestamps: true,
   }
 );
 
-userSchema.methods.passwordMatching = async function (enteredPassword, userPassword) {
-  return await bcrypt.compare(enteredPassword, userPassword);
-};
-
-userSchema.methods.changedPasswordAfter = function (tokenIssuedAt) {
-  if (this.passwordChangedAt) {
-    const changedTimestamp = this.passwordChangedAt.getTime() / 1000;
-    return tokenIssuedAt < changedTimestamp;
-  }
-  return false;
+userSchema.methods.passwordMatching = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 userSchema.methods.changedPasswordAfter = function (tokenIssuedAt) {
@@ -81,12 +71,12 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.passwordResetToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(resetToken)
-    .digest("hex");
+    .digest('hex');
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
@@ -95,4 +85,4 @@ userSchema.methods.createPasswordResetToken = function () {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User
+module.exports = User;
