@@ -20,10 +20,10 @@ const sendTokenResponse = (res, user, statusCode) => {
   });
 };
 
-//SIGNUP
+// SIGNUP
 exports.signup = asyncHandler(async (req, res, next) => {
   // console.log(req.body);
-  const { fullname, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   const emailAlreadyExists = await User.findOne({ email });
 
@@ -32,7 +32,8 @@ exports.signup = asyncHandler(async (req, res, next) => {
   }
 
   const newUser = await User.create({
-    fullname,
+    firstname,
+    lastname,
     email,
     password,
   });
@@ -42,7 +43,6 @@ exports.signup = asyncHandler(async (req, res, next) => {
   const url = `${req.protocol}://${req.get('host')}/me`;
   const welcomeEmail = new Email(newUser, url);
 
-  // Send welcome email asynchronously
   welcomeEmail.sendWelcomeEmail()
     .then(() => {
       sendTokenResponse(res, newUser, 201);
@@ -52,6 +52,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
       sendTokenResponse(res, newUser, 201);
     });
 });
+
 
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;

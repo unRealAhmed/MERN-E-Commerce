@@ -23,8 +23,8 @@ const productValidationSchema = Joi.object({
     'number.base': 'Quantity must be a number',
   }),
 
-  slod: Joi.number().default(0).messages({
-    'number.base': 'Slod must be a number',
+  sold: Joi.number().default(0).messages({
+    'number.base': 'Sold must be a number',
   }),
 
   price: Joi.number().required().messages({

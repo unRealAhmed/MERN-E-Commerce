@@ -6,7 +6,7 @@ const emailEventEmitter = new EventEmitter();
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
-    this.firstName = user.fullname.split(' ')[0];
+    this.firstName = user.firstname;
     this.url = url;
     this.from = 'E-Commerce Team <ahmed@ECommerce.io>';
   }

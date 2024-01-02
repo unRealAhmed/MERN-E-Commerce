@@ -1,16 +1,6 @@
 const mongoose = require('mongoose');
 
 const merchantSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    trim: true
-  },
-  email: {
-    type: String
-  },
-  phoneNumber: {
-    type: String
-  },
   brandName: {
     type: String
   },
@@ -18,15 +8,15 @@ const merchantSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  isActive: {
-    type: Boolean,
-    default: false
-  },
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Brand',
     default: null
   },
+  user: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }],
   status: {
     type: String,
     default: 'Waiting_Approval',

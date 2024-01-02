@@ -20,7 +20,7 @@ router.use(`${baseURL}/categories`, categoryRouter);
 router.use(`${baseURL}/brands`, brandRouter);
 router.use(`${baseURL}/reviews`, reviewRoutes);
 router.use(`${baseURL}/address`, addressRoutes);
-router.use(`${baseURL}/merchant`, merchantRoutes);
+router.use(`${baseURL}/merchants`, merchantRoutes);
 router.use(`${baseURL}/wishlists`, wishlistRouter);
 router.use(`${baseURL}/cart`, cartRouter);
 router.use(`${baseURL}/order`, orderRouter);
