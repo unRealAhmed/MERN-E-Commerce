@@ -8,7 +8,7 @@ const { protect } = require('../../controllers/auth')
 
 const { fileUploadMix } = require('../../middleware/fileUpload');
 const validation = require('../../middleware/validation');
-const productValidation = require('../../validation/productValidation');
+const productSchema = require('../../validation/productValidation');
 
 const productRouter = express.Router();
 
@@ -22,7 +22,7 @@ productRouter.get('/:id', spacificProduct)
 productRouter.delete('/:id', deleteProduct)
 productRouter.put('/:id', updateProduct)
 
-productRouter.post('/', validation(productValidation), fileUploadMix(arrayOFMix, 'product'), addProduct);
+productRouter.post('/', validation(productSchema), fileUploadMix(arrayOFMix, 'product'), addProduct);
 productRouter.get('/', getAllProducts);
 productRouter.get('/:id', spacificProduct);
 productRouter.delete('/:id', deleteProduct);
