@@ -1,0 +1,46 @@
+.main {
+  padding-left: 2.8rem;
+}
+.heading3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  margin-top: 2rem;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1.6rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.brandsitems {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branditem {
+  padding: 1.4rem;
+  border: 1px solid #e4e6eb;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  margin: 0px 1.8rem 1.8rem 0px;
+}
+.branditem:hover {
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+.nameBrand {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #262626;
+}
+
+.descriptionBrand {
+  font-size: 1.4rem;
+  margin-bottom: 1.6rem;
+  color: #323232;
+}
